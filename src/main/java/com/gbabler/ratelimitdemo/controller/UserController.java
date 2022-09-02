@@ -33,16 +33,8 @@ public class UserController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponse> getUsers(@RequestHeader String userId,
-            @RequestHeader SubscriptionType subscriptionType,
-            HttpServletResponse httpServletResponse) {
-        try {
-            rateLimitService.checkLimit(userId, subscriptionType);
-        } catch(TooManyRequestsException ex) {
-            log.error("",ex);
-            httpServletResponse.setHeader("Retry-After", ex.getRetryAfter());
-            httpServletResponse.setStatus(429);
-            return Collections.emptyList();
-        }
+            @RequestHeader SubscriptionType subscriptionType) {
+        rateLimitService.checkLimit(userId, subscriptionType);
         return userService.getUsers();
     }
 }
