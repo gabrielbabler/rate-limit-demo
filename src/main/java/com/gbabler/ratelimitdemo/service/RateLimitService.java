@@ -3,25 +3,25 @@ package com.gbabler.ratelimitdemo.service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import com.gbabler.ratelimitdemo.enumeration.SubscriptionType;
 import com.gbabler.ratelimitdemo.exception.TooManyRequestsException;
 import com.gbabler.ratelimitdemo.model.User;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class RateLimitService {
 
-    Map<String, User> cachedMap = new HashMap<>();
+    private final Map<String, User> cachedMap = new HashMap<>();
 
     public void checkLimit(String userId, SubscriptionType subscriptionType) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
