@@ -10,6 +10,6 @@ public enum SubscriptionType {
     FREE_SUB(1, 5), PAY_SUB(5, 10);
 
     private final int requestLimit;
-    private final int timeLimit;
+    private final int timeLimitInSeconds;
 
 }

@@ -32,7 +32,7 @@ public class RateLimitService {
         if(cachedMap.containsKey(userId)) {
             final User user = cachedMap.get(userId);
 
-            final int timeLimit = user.getSubscriptionType().getTimeLimit();
+            final int timeLimit = user.getSubscriptionType().getTimeLimitInSeconds();
 
             final String lastCallString = user.getLastCall()
                     .format(dateTimeFormatter);
